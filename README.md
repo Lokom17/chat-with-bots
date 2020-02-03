@@ -1,29 +1,25 @@
 # chat-with-bots
 
-## Project setup
+```
+This is a chat with several bots that randomly generate messages. Built on technology websocket.
+```
+
+## Fisrt setup project
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Second run project
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+## Thirt start server
 ```
-yarn build
+node server
 ```
 
 ### Run your unit tests
 ```
 yarn test:unit
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
