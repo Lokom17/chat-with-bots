@@ -48,26 +48,24 @@ export default {
     responseMessage() {
       this.socket.onmessage = ({ data }) => {
         this.CommonMessageArray.push({ name: this.nameOfBot, type: '', data });
-        if (this.CommonMessageArray.find(el => el.name === this.nameOfBot) === undefined) {
-          this.SelectedBotMessageArray = [...this.CommonMessageArray];
-        } else {
-          this.SelectedBotMessageArray = this.CommonMessageArray.filter(el => el.name === this.nameOfBot);
-        }
+        this.checkArraysOfMessage(this.CommonMessageArray, this.nameOfBot);
       };
-    },
-    disconnect() {
-      this.socket.close();
     },
     sendMessage() {
       if (this.message !== '') {
-        this.socket.send(JSON.stringify({ name: this.nameOfBot, message: this.message }));
+        const sendMessage = { name: this.nameOfBot, message: this.message };
+        this.socket.send(JSON.stringify(sendMessage));
         this.CommonMessageArray.push({ name: this.nameOfBot, type: 'user-message', data: this.message });
         this.message = '';
-        if (this.CommonMessageArray.find(el => el.name === this.nameOfBot) === undefined) {
-          this.SelectedBotMessageArray = [...this.CommonMessageArray];
-        } else {
-          this.SelectedBotMessageArray = this.CommonMessageArray.filter(el => el.name === this.nameOfBot);
-        }
+        this.checkArraysOfMessage(this.CommonMessageArray, this.nameOfBot);
+      }
+    },
+    checkArraysOfMessage(commonArr, name) {
+      const chooseArr = commonArr.find(el => el.name === name);
+      if (chooseArr === undefined) {
+        this.SelectedBotMessageArray = [...this.commonArr];
+      } else {
+        this.SelectedBotMessageArray = commonArr.filter(el => el.name === name);
       }
     },
   },
